@@ -1,0 +1,741 @@
+bash
+
+cat > /mnt/user-data/outputs/portfolio-site/index.html << 'HTMLEOF'
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>徐玮婕 · 视频剪辑 / 创意设计作品集</title>
+<meta name="description" content="徐玮婕的视频剪辑与创意设计作品集 — 海外广告创意、内容本地化、新闻专题制作">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --bg:#FFFBF2;--bg-soft:#FFF3DC;--ink:#1A1714;--ink-soft:#6B6358;
+    --coral:#FF4B3E;--yellow:#FFC83D;--teal:#16A394;--card:#FFFFFF;
+    --line:rgba(26,23,20,0.14);--radius:6px;--maxw:1180px;
+    --font-display:'Space Grotesk','Noto Sans SC',sans-serif;
+    --font-body:'Noto Sans SC','Space Grotesk',sans-serif;
+    --font-mono:'JetBrains Mono',monospace;
+  }
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--ink);font-family:var(--font-body);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  .mono{font-family:var(--font-mono);}
+  .container{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+  ::selection{background:var(--coral);color:#fff;}
+  :focus-visible{outline:3px solid var(--coral);outline-offset:3px;}
+
+  .scroll-progress{position:fixed;top:0;left:0;height:4px;width:0%;background:linear-gradient(90deg,var(--coral),var(--yellow));z-index:999;transition:width .08s linear;}
+
+  header.site-header{position:fixed;top:4px;left:0;right:0;z-index:900;background:rgba(255,251,242,0.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .nav-inner{max-width:var(--maxw);margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;}
+  .logo{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;font-size:1.05rem;letter-spacing:.02em;}
+  .rec-dot{width:9px;height:9px;border-radius:50%;background:var(--coral);animation:pulse 1.6s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.35;transform:scale(.78);}}
+  nav.nav-links{display:flex;gap:32px;}
+  nav.nav-links a{font-size:.92rem;font-weight:500;position:relative;padding:4px 0;}
+  nav.nav-links a::after{content:"";position:absolute;left:0;bottom:-2px;height:2px;width:0;background:var(--coral);transition:width .25s ease;}
+  nav.nav-links a:hover::after{width:100%;}
+  .nav-cta{display:flex;align-items:center;gap:14px;}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:.85rem;font-weight:500;padding:10px 18px;border-radius:4px;border:2px solid var(--ink);background:var(--ink);color:var(--bg);cursor:pointer;transition:transform .15s ease,box-shadow .15s ease;box-shadow:4px 4px 0 var(--coral);}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--coral);}
+  .btn:active{transform:translate(0,0);box-shadow:2px 2px 0 var(--coral);}
+  .btn-ghost{background:transparent;color:var(--ink);box-shadow:4px 4px 0 var(--ink);}
+  .btn-ghost:hover{box-shadow:6px 6px 0 var(--ink);}
+  .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:24px;height:2px;background:var(--ink);display:block;transition:.25s;}
+
+  .hero{position:relative;padding:170px 0 100px;overflow:hidden;}
+  .leader-circle{position:absolute;right:-90px;top:60px;width:300px;height:300px;border:2px dashed var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:5rem;font-weight:700;color:var(--line);z-index:0;}
+  .leader-circle::before{content:"";position:absolute;inset:40px;border:1px solid var(--line);border-radius:50%;}
+  .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.25fr .85fr;gap:60px;align-items:center;}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:.82rem;letter-spacing:.08em;color:var(--ink-soft);text-transform:uppercase;margin-bottom:18px;}
+  .eyebrow::before{content:"";width:24px;height:1px;background:var(--coral);}
+  h1.hero-name{font-family:var(--font-display);font-weight:700;font-size:clamp(3rem,7vw,5.2rem);line-height:.98;letter-spacing:-.01em;}
+  .hero-name .latin{display:block;font-size:.32em;font-weight:500;color:var(--coral);letter-spacing:.12em;margin-top:14px;font-family:var(--font-mono);}
+  .hero-tagline{font-size:clamp(1.3rem,2.4vw,1.7rem);font-weight:700;margin:26px 0 18px;max-width:560px;}
+  .hero-tagline .hl{color:var(--coral);}
+  .hero-sub{color:var(--ink-soft);max-width:520px;margin-bottom:36px;font-size:1rem;}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;}
+  .monitor{position:relative;background:var(--card);border:3px solid var(--ink);border-radius:8px;padding:14px;box-shadow:10px 10px 0 var(--coral);}
+  .monitor-frame{position:relative;border-radius:4px;overflow:hidden;aspect-ratio:3/4;background:var(--bg-soft);}
+  .monitor-frame img{width:100%;height:100%;object-fit:cover;}
+  .rec-overlay{position:absolute;top:12px;left:12px;display:flex;align-items:center;gap:6px;background:rgba(26,23,20,.55);color:#fff;padding:5px 10px;border-radius:3px;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.05em;backdrop-filter:blur(2px);}
+  .rec-overlay .dot{width:7px;height:7px;border-radius:50%;background:var(--coral);animation:pulse 1.4s ease-in-out infinite;}
+  .tc-overlay{position:absolute;bottom:12px;right:12px;background:rgba(26,23,20,.55);color:var(--yellow);padding:5px 10px;border-radius:3px;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.04em;backdrop-filter:blur(2px);}
+  .corner{position:absolute;width:18px;height:18px;border-color:#fff;opacity:.85;}
+  .corner.tl{top:10px;left:10px;border-top:2px solid;border-left:2px solid;}
+  .corner.tr{top:10px;right:10px;border-top:2px solid;border-right:2px solid;}
+  .corner.bl{bottom:10px;left:10px;border-bottom:2px solid;border-left:2px solid;}
+  .corner.br{bottom:10px;right:10px;border-bottom:2px solid;border-right:2px solid;}
+  .monitor-caption{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding:0 4px;font-family:var(--font-mono);font-size:.75rem;color:var(--ink-soft);}
+
+  section{padding:108px 0;border-top:1px solid var(--line);}
+  .section-head{margin-bottom:52px;max-width:680px;}
+  .section-head .eyebrow{margin-bottom:14px;}
+  .section-head h2{font-family:var(--font-display);font-weight:700;font-size:clamp(2rem,4vw,2.7rem);}
+  .section-head p{color:var(--ink-soft);margin-top:14px;font-size:1.02rem;}
+
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
+  .about-bio p{font-size:1.08rem;margin-bottom:18px;color:#2b2620;}
+  .about-bio p strong{color:var(--coral);}
+  .edu-list{display:flex;flex-direction:column;gap:18px;}
+  .edu-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;border-left:4px solid var(--teal);}
+  .edu-card .edu-time{font-family:var(--font-mono);font-size:.78rem;color:var(--ink-soft);}
+  .edu-card h3{font-size:1.12rem;margin:6px 0 4px;}
+  .edu-card .edu-degree{font-size:.92rem;color:var(--ink-soft);margin-bottom:10px;}
+  .edu-card .edu-courses{font-size:.88rem;color:var(--ink-soft);line-height:1.7;}
+
+  .timeline{position:relative;}
+  .timeline-item{display:grid;grid-template-columns:150px 32px 1fr;gap:0 18px;position:relative;}
+  .timeline-item+.timeline-item{margin-top:6px;}
+  .timeline-time{font-family:var(--font-mono);font-size:.82rem;color:var(--ink-soft);text-align:right;padding-top:30px;white-space:nowrap;}
+  .timeline-rail{position:relative;display:flex;justify-content:center;}
+  .timeline-rail::before{content:"";position:absolute;top:0;bottom:0;width:2px;background-image:repeating-linear-gradient(to bottom,var(--ink) 0 6px,transparent 6px 12px);opacity:.35;}
+  .timeline-dot{position:relative;top:30px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:3px solid var(--ink);z-index:2;}
+  .timeline-item[data-track="t1"] .timeline-dot{border-color:var(--teal);}
+  .timeline-item[data-track="t2"] .timeline-dot{border-color:var(--coral);}
+  .timeline-item[data-track="t3"] .timeline-dot{border-color:var(--yellow);}
+  .timeline-item[data-track="t4"] .timeline-dot{border-color:var(--ink);}
+  .timeline-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px 28px;margin:14px 0 36px;}
+  .clip-tag{display:inline-block;font-family:var(--font-mono);font-size:.72rem;font-weight:600;padding:4px 10px;border-radius:3px;letter-spacing:.03em;margin-bottom:12px;color:#fff;}
+  .timeline-item[data-track="t1"] .clip-tag{background:var(--teal);}
+  .timeline-item[data-track="t2"] .clip-tag{background:var(--coral);}
+  .timeline-item[data-track="t3"] .clip-tag{background:var(--yellow);color:var(--ink);}
+  .timeline-item[data-track="t4"] .clip-tag{background:var(--ink);}
+  .timeline-card h3{font-size:1.18rem;margin-bottom:2px;}
+  .timeline-card h3 small{display:block;font-weight:400;font-size:.85rem;color:var(--ink-soft);margin-top:3px;}
+  .timeline-card ul{margin-top:14px;display:flex;flex-direction:column;gap:8px;}
+  .timeline-card ul li{position:relative;padding-left:18px;font-size:.94rem;color:#2b2620;}
+  .timeline-card ul li::before{content:"▸";position:absolute;left:0;color:var(--coral);}
+
+  .skills-groups{display:grid;grid-template-columns:1fr 1fr;gap:36px;}
+  .skill-group{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px 28px;}
+  .skill-group h4{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.06em;color:var(--ink-soft);text-transform:uppercase;margin-bottom:18px;}
+  .skill-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px dashed var(--line);}
+  .skill-row:last-child{border-bottom:none;}
+  .skill-name{font-weight:500;font-size:.97rem;}
+  .skill-level{display:flex;gap:4px;}
+  .skill-level i{width:18px;height:6px;border-radius:2px;background:var(--line);display:block;}
+  .skill-level i.on{background:var(--coral);}
+  .skill-badge{font-family:var(--font-mono);font-size:.78rem;background:var(--bg-soft);padding:5px 10px;border-radius:3px;color:var(--ink-soft);}
+
+  /* ===== Portfolio ===== */
+  .filter-bar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:40px;}
+  .filter-btn{font-family:var(--font-mono);font-size:.82rem;padding:9px 16px;border-radius:30px;border:1.5px solid var(--ink);background:transparent;cursor:pointer;transition:.2s;color:var(--ink);}
+  .filter-btn.active,.filter-btn:hover{background:var(--ink);color:var(--bg);}
+  .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  .work-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:transform .2s ease,box-shadow .2s ease;}
+  .work-card:hover{transform:translateY(-4px);box-shadow:6px 6px 0 var(--line);}
+  .work-frame{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#000;}
+  .work-card[data-ratio="9:16"] .work-frame{aspect-ratio:9/16;}
+  .work-frame video{width:100%;height:100%;object-fit:cover;display:block;}
+  .work-thumb{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
+  .grad-1{background:linear-gradient(135deg,var(--coral),#7a1f17);}
+  .grad-2{background:linear-gradient(135deg,var(--teal),#0a4a44);}
+  .grad-3{background:linear-gradient(135deg,var(--yellow),#a3650c);}
+  .grad-4{background:linear-gradient(135deg,#3a3530,var(--ink));}
+  .grad-5{background:linear-gradient(135deg,var(--coral),var(--yellow));}
+  .grad-6{background:linear-gradient(135deg,var(--teal),var(--yellow));}
+  .grad-7{background:linear-gradient(135deg,#c0392b,#922b21);}
+  .grad-8{background:linear-gradient(135deg,#1a6b5a,#0e4d40);}
+  .grad-9{background:linear-gradient(135deg,#c9a227,#8a6d0b);}
+  .grad-10{background:linear-gradient(135deg,#2c2c2c,#4a4a4a);}
+  .grad-11{background:linear-gradient(135deg,#8e44ad,#6c3483);}
+  .grad-12{background:linear-gradient(135deg,#2471a3,#1a5276);}
+  .reel-label{position:absolute;top:12px;left:12px;font-family:var(--font-mono);font-size:.72rem;color:#fff;background:rgba(0,0,0,.35);padding:4px 9px;border-radius:3px;letter-spacing:.05em;}
+  .play-btn{width:58px;height:58px;border-radius:50%;border:2px solid #fff;background:rgba(0,0,0,.25);color:#fff;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;backdrop-filter:blur(2px);}
+  .play-btn:hover{background:var(--coral);border-color:var(--coral);transform:scale(1.08);}
+  .work-missing{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:#fff;text-align:center;padding:20px;gap:8px;}
+  .work-missing p:first-child{font-weight:600;}
+  .work-missing p.mono{font-size:.72rem;color:var(--yellow);word-break:break-all;}
+  .work-meta{padding:20px 22px 24px;}
+  .work-tag{font-family:var(--font-mono);font-size:.72rem;color:var(--coral);letter-spacing:.03em;}
+  .work-meta h3{font-size:1.08rem;margin:8px 0 8px;}
+  .work-meta p{font-size:.9rem;color:var(--ink-soft);margin-bottom:10px;}
+  .work-file{font-size:.7rem;color:#b4ab9c;}
+
+  .award-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  .award-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:30px 26px;position:relative;}
+  .award-card::before{content:"★";position:absolute;top:22px;right:24px;color:var(--yellow);font-size:1.4rem;}
+  .award-year{font-family:var(--font-mono);font-size:.85rem;color:var(--coral);font-weight:600;}
+  .award-card h3{font-size:1.04rem;margin-top:12px;line-height:1.5;max-width:85%;}
+
+  .contact{background:var(--ink);color:var(--bg);}
+  .contact .eyebrow{color:var(--yellow);}
+  .contact .eyebrow::before{background:var(--yellow);}
+  .contact-inner{text-align:center;max-width:680px;margin:0 auto;}
+  .contact h2{font-family:var(--font-display);font-weight:700;font-size:clamp(2.2rem,5vw,3.2rem);margin-bottom:18px;}
+  .contact-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-bottom:44px;}
+  .contact-item{font-family:var(--font-mono);font-size:.92rem;border:1px solid rgba(255,251,242,.25);padding:14px 22px;border-radius:6px;transition:.2s;}
+  a.contact-item:hover{border-color:var(--coral);background:rgba(255,75,62,.12);}
+  .contact .btn{box-shadow:4px 4px 0 var(--coral);background:var(--bg);color:var(--ink);border-color:var(--bg);}
+  .contact .btn:hover{box-shadow:6px 6px 0 var(--coral);}
+
+  footer{padding:30px 0;text-align:center;font-family:var(--font-mono);font-size:.78rem;color:var(--ink-soft);background:var(--ink);border-top:1px solid rgba(255,251,242,.12);}
+  footer span{color:#bdb6a8;}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}html{scroll-behavior:auto;}}
+
+  @media(max-width:980px){
+    .hero-grid{grid-template-columns:1fr;}
+    .monitor{max-width:380px;}
+    .about-grid{grid-template-columns:1fr;gap:44px;}
+    .skills-groups{grid-template-columns:1fr;}
+    .work-grid{grid-template-columns:repeat(2,1fr);}
+    .award-grid{grid-template-columns:1fr;}
+    .leader-circle{display:none;}
+  }
+  @media(max-width:768px){
+    nav.nav-links{position:fixed;top:64px;left:0;right:0;bottom:0;background:var(--bg);flex-direction:column;align-items:flex-start;padding:30px 28px;gap:22px;transform:translateX(100%);transition:transform .3s ease;font-size:1.1rem;}
+    nav.nav-links.open{transform:translateX(0);}
+    .hamburger{display:flex;}
+    .nav-cta .btn-ghost{display:none;}
+    section{padding:72px 0;}
+    .timeline-item{grid-template-columns:24px 1fr;}
+    .timeline-time{display:none;}
+    .work-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<header class="site-header">
+  <div class="nav-inner">
+    <a href="#hero" class="logo"><span class="rec-dot"></span>徐玮婕 · XWJ</a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#about">关于我</a>
+      <a href="#experience">实习经历</a>
+      <a href="#skills">技能</a>
+      <a href="#portfolio">作品集</a>
+      <a href="#awards">获奖经历</a>
+      <a href="#contact">联系我</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#contact" class="btn btn-ghost">联系我</a>
+      <button class="hamburger" id="hamburger" aria-label="打开菜单"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero" id="hero">
+    <div class="leader-circle mono">8</div>
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <span class="eyebrow">VIDEO EDITOR / 视频剪辑 · 创意设计</span>
+        <h1 class="hero-name">徐玮婕<span class="latin">XU WEIJIE — REEL 2026</span></h1>
+        <p class="hero-tagline">用<span class="hl">剪辑</span>，把创意变成<span class="hl">看得见</span>的故事。</p>
+        <p class="hero-sub">暨南大学新闻与传播学硕士 · 湖南大学广告学学士。专注短视频剪辑、海外广告创意制作与跨文化内容本地化，从脚本到成片全流程产出。</p>
+        <div class="hero-actions">
+          <a href="#portfolio" class="btn">▶&nbsp;查看作品</a>
+          <a href="resume.pdf" class="btn btn-ghost" download>↓&nbsp;下载简历</a>
+          <a href="#contact" class="btn btn-ghost">✉&nbsp;联系我</a>
+        </div>
+      </div>
+      <div class="monitor reveal">
+        <div class="monitor-frame">
+          <img src="assets/profile.png" alt="徐玮婕证件照">
+          <div class="rec-overlay"><span class="dot"></span>REC</div>
+          <div class="tc-overlay mono timecode-live">00:00:00:00</div>
+          <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+        </div>
+        <div class="monitor-caption"><span>CAM_01 · 长沙</span><span>1080P</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">00:00:30:00 — ABOUT</span>
+        <h2>关于我</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-bio reveal">
+          <p>我有<strong>广告学</strong>与<strong>新闻传播学</strong>的复合背景，从内容策划到剪辑成片都能独立完成。在钛动科技参与海外品牌广告制作期间，独立负责创意优化与视觉设计，相关项目帮品牌拿下了<strong>1.5亿+曝光</strong>；也尝试过用 AIGC 工具做多语种素材，把内容"降本增效"落到实处。</p>
+          <p>比起单纯的技术执行，我更享受先理解一个市场、一群观众，再决定怎么剪、怎么讲——无论是面向东南亚用户的本地化内容，还是面向台生群体的短视频策划，我都希望剪辑能服务于"被看懂"这件事。</p>
+          <p>目前已于今年六月毕业，意向城市<strong>长沙</strong>。</p>
+        </div>
+        <div class="edu-list reveal">
+          <div class="edu-card">
+            <span class="edu-time mono">2023.09 – 2026.06</span>
+            <h3>暨南大学</h3>
+            <div class="edu-degree">新闻与传播学 · 硕士研究生</div>
+            <div class="edu-courses">主修课程：媒介文化、消费者行为学研究、非虚构写作、港澳台媒体研究等</div>
+          </div>
+          <div class="edu-card">
+            <span class="edu-time mono">2019.09 – 2023.06</span>
+            <h3>湖南大学</h3>
+            <div class="edu-degree">广告学 · 本科</div>
+            <div class="edu-courses">主修课程：电视节目包装与编排、品牌传播与管理、数字营销传播、市场调查与分析、广告经营与管理等</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">00:01:00:00 — TIMELINE</span>
+        <h2>实习经历</h2>
+        <p>四段实习，从广告执行到视频设计、内容策划与新闻后期，像剪辑时间线一样按时间排开。</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item reveal" data-track="t1">
+          <div class="timeline-time mono">2022.07 – 2022.10</div>
+          <div class="timeline-rail"><div class="timeline-dot"></div></div>
+          <div class="timeline-card">
+            <span class="clip-tag">广告执行</span>
+            <h3>湖南快乐阳光互动娱乐传媒有限公司<small>广告营销中心 · 广告执行实习生</small></h3>
+            <ul>
+              <li>负责综艺广告拉片与权益统计</li>
+              <li>总结人物画像，协助导师完成结案报告</li>
+            </ul>
+          </div>
+        </div>
+        <div class="timeline-item reveal" data-track="t2">
+          <div class="timeline-time mono">2025.03 – 2025.07</div>
+          <div class="timeline-rail"><div class="timeline-dot"></div></div>
+          <div class="timeline-card">
+            <span class="clip-tag">视频设计</span>
+            <h3>钛动科技<small>视频设计实习生</small></h3>
+            <ul>
+              <li><strong>Aiper（全球化智能品牌）：</strong>参与泳池机器人海外广告素材制作，负责混剪视频创意优化及视觉设计，累计实现 1.5亿+ 曝光，日均广告消耗 3w+</li>
+              <li><strong>Saylo（AI互动应用）：</strong>撰写广告脚本并制作多语种素材（中/英/日），结合 AIGC 工具完成语音生成及素材优化，提升点击转化表现</li>
+              <li><strong>小奥汀 Little Ondine：</strong>负责品牌越南市场内容本地化，重构视觉与剪辑风格以适配东南亚用户审美</li>
+            </ul>
+          </div>
+        </div>
+        <div class="timeline-item reveal" data-track="t3">
+          <div class="timeline-time mono">2025.07 – 2025.09</div>
+          <div class="timeline-rail"><div class="timeline-dot"></div></div>
+          <div class="timeline-card">
+            <span class="clip-tag">内容策划</span>
+            <h3>广州小满创造文化发展有限公司<small>新媒体策划实习生</small></h3>
+            <ul>
+              <li>负责"筑梦珠江 展翅飞翔"台生广州实习主题短视频大赛的整体内容策划与梳理</li>
+              <li>负责幸福蓝海线下影院主题活动的前期构想与内容配合</li>
+            </ul>
+          </div>
+        </div>
+        <div class="timeline-item reveal" data-track="t4">
+          <div class="timeline-time mono">2025.09 – 2025.11</div>
+          <div class="timeline-rail"><div class="timeline-dot"></div></div>
+          <div class="timeline-card">
+            <span class="clip-tag">后期制作</span>
+            <h3>湖南娄底电视台<small>新闻综合频道实习生</small></h3>
+            <ul>
+              <li>负责融媒体栏目《小晨故事》重阳节专题短视频的后期制作</li>
+              <li>参与台内大型活动视频素材处理与宣发物料制作，支持活动传播落地</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">00:01:30:00 — SKILLS</span>
+        <h2>技能 & 工具</h2>
+      </div>
+      <div class="skills-groups">
+        <div class="skill-group reveal">
+          <h4>剪辑 / 设计软件</h4>
+          <div class="skill-row"><span class="skill-name">Premiere Pro</span><span class="skill-level"><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+          <div class="skill-row"><span class="skill-name">剪映</span><span class="skill-level"><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+          <div class="skill-row"><span class="skill-name">Photoshop</span><span class="skill-level"><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+          <div class="skill-row"><span class="skill-name">After Effects<br><small style="color:var(--ink-soft);font-weight:400;">模板应用 / 后期特效合成</small></span><span class="skill-level"><i class="on"></i><i class="on"></i><i></i></span></div>
+        </div>
+        <div class="skill-group reveal">
+          <h4>AIGC / 智能创意工具</h4>
+          <div class="skill-row"><span class="skill-name">AI 语音翻译合成</span><span class="skill-level"><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+          <div class="skill-row"><span class="skill-name">AI 角色动图生成</span><span class="skill-level"><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+          <div class="skill-row"><span class="skill-name">AI 视觉优化 / 降本增效</span><span class="skill-level"><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+        </div>
+        <div class="skill-group reveal">
+          <h4>办公能力</h4>
+          <div class="skill-row"><span class="skill-name">PPT / Word</span><span class="skill-level"><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+          <div class="skill-row"><span class="skill-name">Excel<br><small style="color:var(--ink-soft);font-weight:400;">基础数据处理 / 常规图表</small></span><span class="skill-level"><i class="on"></i><i></i><i></i></span></div>
+        </div>
+        <div class="skill-group reveal">
+          <h4>语言 & 证书</h4>
+          <div class="skill-row"><span class="skill-name">英语</span><span class="skill-badge mono">CET-4</span></div>
+          <div class="skill-row"><span class="skill-name">普通话</span><span class="skill-badge mono">二级甲等</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PORTFOLIO ===================== -->
+  <section id="portfolio">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">00:02:00:00 — SELECTED WORK</span>
+        <h2>作品集</h2>
+      </div>
+
+      <div class="filter-bar reveal">
+        <button class="filter-btn active" data-filter="all">全部</button>
+        <button class="filter-btn" data-filter="overseas">海外广告</button>
+        <button class="filter-btn" data-filter="aigc">AIGC 创意</button>
+        <button class="filter-btn" data-filter="local">内容本地化</button>
+        <button class="filter-btn" data-filter="news">新闻专题</button>
+        <button class="filter-btn" data-filter="award">获奖作品</button>
+        <button class="filter-btn" data-filter="personal">个人创作</button>
+      </div>
+
+      <div class="work-grid">
+
+        <!-- ── 海外广告 ── -->
+        <article class="work-card reveal" data-category="overseas" data-ratio="9:16">
+          <div class="work-frame" data-src="videos/aiper-x1-1.mp4">
+            <div class="work-thumb grad-1">
+              <span class="reel-label mono">OVERSEAS 01</span>
+              <button class="play-btn" aria-label="播放">▶</button>
+            </div>
+          </div>
+          <div class="work-meta">
+            <span class="work-tag">海外广告 · 钛动科技</span>
+            <h3>Aiper X1 泳池机器人广告（一）</h3>
+            <p>海外信息流混剪创意优化，聚焦场景引入与注意力抓取，项目累计曝光 1.5亿+</p>
+            <span class="work-file mono">videos/aiper-x1-1.mp4</span>
+          </div>
+        </article>
+
+        <article class="work-card reveal" data-category="overseas" data-ratio="9:16">
+          <div class="work-frame" data-src="videos/aiper-x1-2.mp4">
+            <div class="work-thumb grad-7">
+              <span class="reel-label mono">OVERSEAS 02</span>
+              <button class="play-btn" aria-label="播放">▶</button>
+            </div>
+          </div>
+          <div class="work-meta">
+            <span class="work-tag">海外广告 · 钛动科技</span>
+            <h3>Aiper X1 泳池机器人广告（二）</h3>
+            <p>不同钩子策略的版本测试，强化产品使用前后对比与生活方式场景表达</p>
+            <span class="work-file mono">videos/aiper-x1-2.mp4</span>
+          </div>
+        </article>
+
+        <!-- ── AIGC 创意 ── -->
+        <article class="work-card reveal" data-category="aigc" data-ratio="9:16">
+          <div class="work-frame" data-src="videos/saylo-japan.mp4">
+            <div class="work-thumb grad-3">
+              <span class="reel-label mono">AIGC 01</span>
+              <button class="play-btn" aria-label="播放">▶</button>
+            </div>
+          </div>
+          <div class="work-meta">
+            <span class="work-tag">AIGC 多语种 · 钛动科技</span>
+            <h3>Saylo AI 应用广告 · 日本版</h3>
+            <p>撰写日语广告脚本，结合 AIGC 工具完成语音合成与素材优化，适配日本市场用户习惯</p>
+            <span class="work-file mono">videos/saylo-japan.mp4</span>
+          </div>
+        </article>
+
+        <article class="work-card reveal" data-category="aigc" data-ratio="9:16">
+          <div class="work-frame" data-src="videos/saylo-taiwan.mp4">
+            <div class="work-thumb grad-9">
+              <span class="reel-label mono">AIGC 02</span>
+              <button class="play-btn" aria-label="播放">▶</button>
+            </div>
+          </div>
+          <div class="work-meta">
+            <span class="work-tag">AIGC 多语种 · 钛动科技</span>
+            <h3>Saylo AI 应用广告 · 台湾版</h3>
+            <p>针对台湾繁中市场调整内容表达与情绪切入方式，结合 AIGC 工具提升制作效率</p>
+            <span class="work-file mono">videos/saylo-taiwan.mp4</span>
+          </div>
+        </article>
+
+        <!-- ── 内容本地化 ── -->
+        <article class="work-card reveal" data-category="local" data-ratio="9:16">
+          <div class="work-frame" data-src="videos/ondine-vn1.mp4">
+            <div class="work-thumb grad-6">
+              <span class="reel-label mono">LOCAL 01</span>
+              <button class="play-btn" aria-label="播放">▶</button>
+            </div>
+          </div>
+          <div class="work-meta">
+            <span class="work-tag">内容本地化 · 钛动科技</span>
+            <h3>小奥汀水眉笔混剪 · 越南版（一）</h3>
+            <p>重构视觉风格与剪辑节奏，适配越南美妆用户审美，强化妆前妆后视觉反差</p>
+            <span class="work-file mono">videos/ondine-vn1.mp4</span>
+          </div>
+        </article>
+
+        <article class="work-card reveal" data-category="local" data-ratio="9:16">
+          <div class="work-frame" data-src="videos/ondine-vn2.mp4">
+            <div class="work-thumb grad-8">
+              <span class="reel-label mono">LOCAL 02</span>
+              <button class="play-btn" aria-label="播放">▶</button>
+            </div>
+          </div>
+          <div class="work-meta">
+            <span class="work-tag">内容本地化 · 钛动科技</span>
+            <h3>小奥汀水眉笔混剪 · 越南版（二）</h3>
+            <p>不同节奏版本，针对东南亚信息流平台调整字幕风格与产品展示顺序</p>
+            <span class="work-file mono">videos/ondine-vn2.mp4</span>
+          </div>
+        </article>
+
+        <!-- ── 新闻专题 ── -->
+        <article class="work-card reveal" data-category="news" data-ratio="16:9">
+          <div class="work-frame" data-src="videos/xiaochen.mp4">
+            <div class="work-thumb grad-4">
+              <span class="reel-label mono">NEWS 01</span>
+              <button class="play-btn" aria-label="播放">▶</button>
+            </div>
+          </div>
+          <div class="work-meta">
+            <span class="work-tag">新闻专题 · 湖南娄底电视台</span>
+            <h3>《小晨故事》重阳节专题短视频</h3>
+            <p>融媒体栏目后期制作，完成剪辑、调色与字幕包装，支持活动传播落地</p>
+            <span class="work-file mono">videos/xiaochen.mp4</span>
+          </div>
+        </article>
+
+        <article class="work-card reveal" data-category="news" data-ratio="16:9">
+          <div class="work-frame" data-src="videos/taisheng-01.mp4">
+            <div class="work-thumb grad-10">
+              <span class="reel-label mono">NEWS 02</span>
+              <button class="play-btn" aria-label="播放">▶</button>
+            </div>
+          </div>
+          <div class="work-meta">
+            <span class="work-tag">台生采访 · 广州小满创造</span>
+            <h3>台生广州实习采访短视频（一）</h3>
+            <p>参与"筑梦珠江 展翅飞翔"活动，负责台生实习者采访拍摄与后期剪辑</p>
+            <span class="work-file mono">videos/taisheng-01.mp4</span>
+          </div>
+        </article>
+
+        <article class="work-card reveal" data-category="news" data-ratio="16:9">
+          <div class="work-frame" data-src="videos/taisheng-02.mp4">
+            <div class="work-thumb grad-12">
+              <span class="reel-label mono">NEWS 03</span>
+              <button class="play-btn" aria-label="播放">▶</button>
+            </div>
+          </div>
+          <div class="work-meta">
+            <span class="work-tag">台生采访 · 广州小满创造</span>
+            <h3>台生广州实习采访短视频（二）</h3>
+            <p>不同受访者的故事剪辑版本，通过个体叙事呈现台生在大陆实习的真实体验</p>
+            <span class="work-file mono">videos/taisheng-02.mp4</span>
+          </div>
+        </article>
+
+        <!-- ── 获奖作品 ── -->
+        <article class="work-card reveal" data-category="award" data-ratio="9:16">
+          <div class="work-frame" data-src="videos/award-guangzhou.mp4">
+            <div class="work-thumb grad-5">
+              <span class="reel-label mono">AWARD 01</span>
+              <button class="play-btn" aria-label="播放">▶</button>
+            </div>
+          </div>
+          <div class="work-meta">
+            <span class="work-tag">获奖作品 · 三等奖</span>
+            <h3>"印象广州"短视频大赛获奖作品</h3>
+            <p>"筑梦珠江 展翅飞翔"台湾大学生广州实习活动之"印象广州"短视频大赛三等奖</p>
+            <span class="work-file mono">videos/award-guangzhou.mp4</span>
+          </div>
+        </article>
+
+        <article class="work-card reveal" data-category="award" data-ratio="16:9">
+          <div class="work-frame" data-src="videos/award-ads.mp4">
+            <div class="work-thumb grad-2">
+              <span class="reel-label mono">AWARD 02</span>
+              <button class="play-btn" aria-label="播放">▶</button>
+            </div>
+          </div>
+          <div class="work-meta">
+            <span class="work-tag">获奖作品 · 二等奖</span>
+            <h3>大学生广告艺术大赛微电影广告</h3>
+            <p>第十四届全国大学生广告艺术大赛微电影广告湖南赛区二等奖</p>
+            <span class="work-file mono">videos/award-ads.mp4</span>
+          </div>
+        </article>
+
+        <!-- ── 个人创作 ── -->
+        <article class="work-card reveal" data-category="personal" data-ratio="9:16">
+          <div class="work-frame" data-src="videos/nantou.mp4">
+            <div class="work-thumb grad-11">
+              <span class="reel-label mono">PERSONAL 01</span>
+              <button class="play-btn" aria-label="播放">▶</button>
+            </div>
+          </div>
+          <div class="work-meta">
+            <span class="work-tag">个人创作 · 宣传短片</span>
+            <h3>南头古镇宣传视频</h3>
+            <p>自主策划拍摄，以古镇历史与现代文化交融为主题，独立完成脚本、拍摄与后期</p>
+            <span class="work-file mono">videos/nantou.mp4</span>
+          </div>
+        </article>
+
+        <article class="work-card reveal" data-category="personal" data-ratio="16:9">
+          <div class="work-frame" data-src="videos/lotr.mp4">
+            <div class="work-thumb grad-4">
+              <span class="reel-label mono">PERSONAL 02</span>
+              <button class="play-btn" aria-label="播放">▶</button>
+            </div>
+          </div>
+          <div class="work-meta">
+            <span class="work-tag">个人创作 · 混剪</span>
+            <h3>指环王混剪</h3>
+            <p>以情绪驱动为核心的混剪作品，探索节奏、音乐与画面叙事之间的配合关系</p>
+            <span class="work-file mono">videos/lotr.mp4</span>
+          </div>
+        </article>
+
+        <article class="work-card reveal" data-category="personal" data-ratio="16:9">
+          <div class="work-frame" data-src="videos/biye-vlog.mp4">
+            <div class="work-thumb grad-8">
+              <span class="reel-label mono">PERSONAL 03</span>
+              <button class="play-btn" aria-label="播放">▶</button>
+            </div>
+          </div>
+          <div class="work-meta">
+            <span class="work-tag">个人创作 · Vlog</span>
+            <h3>毕业 Vlog</h3>
+            <p>记录研究生毕业前后的生活片段，通过叙事性剪辑呈现个人视角与情感表达</p>
+            <span class="work-file mono">videos/biye-vlog.mp4</span>
+          </div>
+        </article>
+
+        <article class="work-card reveal" data-category="personal" data-ratio="16:9">
+          <div class="work-frame" data-src="videos/meme-hip.mp4">
+            <div class="work-thumb grad-3">
+              <span class="reel-label mono">PERSONAL 04</span>
+              <button class="play-btn" aria-label="播放">▶</button>
+            </div>
+          </div>
+          <div class="work-meta">
+            <span class="work-tag">个人创作 · 创意混剪</span>
+            <h3>meme-hip 创意短片</h3>
+            <p>融合 meme 文化与 hip-hop 节奏的实验性混剪，探索娱乐性与视觉节奏感的边界</p>
+            <span class="work-file mono">videos/meme-hip.mp4</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="awards">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">00:02:30:00 — AWARDS</span>
+        <h2>获奖经历</h2>
+      </div>
+      <div class="award-grid">
+        <div class="award-card reveal">
+          <span class="award-year mono">2022</span>
+          <h3>第十四届全国大学生广告艺术大赛微电影广告湖南赛区二等奖</h3>
+        </div>
+        <div class="award-card reveal">
+          <span class="award-year mono">2023</span>
+          <h3>广东省第四届高校防范非法金融活动微视频和海报设计大赛优秀奖</h3>
+        </div>
+        <div class="award-card reveal">
+          <span class="award-year mono">2025</span>
+          <h3>"筑梦珠江 展翅飞翔"台湾大学生广州实习活动之"印象广州"短视频大赛三等奖</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="container contact-inner">
+      <span class="eyebrow">THE END — 联系我</span>
+      <h2>一起合作吧</h2>
+      <div class="contact-grid">
+        <a href="mailto:xia51111115@163.com" class="contact-item">✉ xia51111115@163.com</a>
+        <a href="tel:17773862279" class="contact-item">☎ 177 7386 2279</a>
+        <span class="contact-item">📍 意向城市：长沙</span>
+      </div>
+      <a href="resume.pdf" class="btn" download>↓ 下载完整简历 PDF</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>© 2026 徐玮婕</span> 
+</footer>
+
+<script>
+  const progressBar = document.getElementById('scrollProgress');
+  function updateProgress(){
+    const h = document.documentElement;
+    progressBar.style.width = ((h.scrollTop/(h.scrollHeight-h.clientHeight))*100||0)+'%';
+  }
+  document.addEventListener('scroll',updateProgress,{passive:true});
+  updateProgress();
+
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click',()=>navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('open')));
+
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});
+  },{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  const pad=(n,l=2)=>n.toString().padStart(l,'0');
+  let frame=0;
+  const tcEls=document.querySelectorAll('.timecode-live');
+  if(tcEls.length&&!window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+    setInterval(()=>{
+      frame++;
+      const ff=frame%24,totalSec=Math.floor(frame/24),ss=totalSec%60,mm=Math.floor(totalSec/60)%60,hh=Math.floor(totalSec/3600);
+      tcEls.forEach(el=>el.textContent=`${pad(hh)}:${pad(mm)}:${pad(ss)}:${pad(ff)}`);
+    },1000/24);
+  }
+
+  document.querySelectorAll('.filter-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const f=btn.dataset.filter;
+      document.querySelectorAll('.work-card').forEach(card=>{
+        card.style.display=(f==='all'||card.dataset.category===f)?'':'none';
+      });
+    });
+  });
+
+  document.querySelectorAll('.play-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const frame=btn.closest('.work-frame');
+      const src=frame.dataset.src;
+      const video=document.createElement('video');
+      video.controls=true;video.autoplay=true;video.playsInline=true;video.src=src;
+      video.addEventListener('error',()=>{
+        frame.innerHTML=`<div class="work-missing"><p>视频文件未找到</p><p class="mono">请将文件命名为 ${src.split('/').pop()}<br>放入 videos 文件夹</p></div>`;
+      });
+      frame.innerHTML='';
+      frame.appendChild(video);
+    });
+  });
+</script>
+
+</body>
+</html>
+HTMLEOF
+echo "写入完成，共 $(wc -l < /mnt/user-data/outputs/portfolio-site/index.html) 行"
