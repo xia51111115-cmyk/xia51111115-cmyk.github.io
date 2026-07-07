@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -132,7 +131,7 @@
   .work-card:hover{transform:translateY(-4px);box-shadow:6px 6px 0 var(--line);}
   .work-frame{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#000;}
   .work-card[data-ratio="9:16"] .work-frame{aspect-ratio:9/16;}
-  .work-frame video{width:100%;height:100%;object-fit:cover;display:block;}
+  .work-frame iframe{width:100%;height:100%;border:none;display:block;}
   .work-thumb{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
   .grad-1{background:linear-gradient(135deg,var(--coral),#7a1f17);}
   .grad-2{background:linear-gradient(135deg,var(--teal),#0a4a44);}
@@ -149,14 +148,12 @@
   .reel-label{position:absolute;top:12px;left:12px;font-family:var(--font-mono);font-size:.72rem;color:#fff;background:rgba(0,0,0,.35);padding:4px 9px;border-radius:3px;letter-spacing:.05em;}
   .play-btn{width:58px;height:58px;border-radius:50%;border:2px solid #fff;background:rgba(0,0,0,.25);color:#fff;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;backdrop-filter:blur(2px);}
   .play-btn:hover{background:var(--coral);border-color:var(--coral);transform:scale(1.08);}
-  .work-missing{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:#fff;text-align:center;padding:20px;gap:8px;}
-  .work-missing p:first-child{font-weight:600;}
-  .work-missing p.mono{font-size:.72rem;color:var(--yellow);word-break:break-all;}
   .work-meta{padding:20px 22px 24px;}
   .work-tag{font-family:var(--font-mono);font-size:.72rem;color:var(--coral);letter-spacing:.03em;}
   .work-meta h3{font-size:1.08rem;margin:8px 0 8px;}
   .work-meta p{font-size:.9rem;color:var(--ink-soft);margin-bottom:10px;}
-  .work-file{font-size:.7rem;color:#b4ab9c;}
+  .bili-link{display:inline-flex;align-items:center;gap:5px;font-family:var(--font-mono);font-size:.72rem;color:#00a1d6;opacity:.8;transition:.15s;}
+  .bili-link:hover{opacity:1;}
 
   .award-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
   .award-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:30px 26px;position:relative;}
@@ -385,6 +382,7 @@
       <div class="section-head reveal">
         <span class="eyebrow">00:02:00:00 — SELECTED WORK</span>
         <h2>作品集</h2>
+        <p>点击播放按钮可直接在页面内观看，视频托管于哔哩哔哩。</p>
       </div>
 
       <div class="filter-bar reveal">
@@ -401,7 +399,7 @@
 
         <!-- ── 海外广告 ── -->
         <article class="work-card reveal" data-category="overseas" data-ratio="9:16">
-          <div class="work-frame" data-src="videos/aiper-x1-1.mp4">
+          <div class="work-frame" data-bvid="BV1FaM86GEbs">
             <div class="work-thumb grad-1">
               <span class="reel-label mono">OVERSEAS 01</span>
               <button class="play-btn" aria-label="播放">▶</button>
@@ -411,12 +409,12 @@
             <span class="work-tag">海外广告 · 钛动科技</span>
             <h3>Aiper X1 泳池机器人广告（一）</h3>
             <p>海外信息流混剪创意优化，聚焦场景引入与注意力抓取，项目累计曝光 1.5亿+</p>
-            <span class="work-file mono">videos/aiper-x1-1.mp4</span>
+            <a class="bili-link" href="https://www.bilibili.com/video/BV1FaM86GEbs/" target="_blank" rel="noopener">↗ 在哔哩哔哩查看</a>
           </div>
         </article>
 
         <article class="work-card reveal" data-category="overseas" data-ratio="9:16">
-          <div class="work-frame" data-src="videos/aiper-x1-2.mp4">
+          <div class="work-frame" data-bvid="BV1FaM86GEdN">
             <div class="work-thumb grad-7">
               <span class="reel-label mono">OVERSEAS 02</span>
               <button class="play-btn" aria-label="播放">▶</button>
@@ -426,13 +424,13 @@
             <span class="work-tag">海外广告 · 钛动科技</span>
             <h3>Aiper X1 泳池机器人广告（二）</h3>
             <p>不同钩子策略的版本测试，强化产品使用前后对比与生活方式场景表达</p>
-            <span class="work-file mono">videos/aiper-x1-2.mp4</span>
+            <a class="bili-link" href="https://www.bilibili.com/video/BV1FaM86GEdN/" target="_blank" rel="noopener">↗ 在哔哩哔哩查看</a>
           </div>
         </article>
 
         <!-- ── AIGC 创意 ── -->
         <article class="work-card reveal" data-category="aigc" data-ratio="9:16">
-          <div class="work-frame" data-src="videos/saylo-japan.mp4">
+          <div class="work-frame" data-bvid="BV1pxM86jEb3">
             <div class="work-thumb grad-3">
               <span class="reel-label mono">AIGC 01</span>
               <button class="play-btn" aria-label="播放">▶</button>
@@ -442,12 +440,12 @@
             <span class="work-tag">AIGC 多语种 · 钛动科技</span>
             <h3>Saylo AI 应用广告 · 日本版</h3>
             <p>撰写日语广告脚本，结合 AIGC 工具完成语音合成与素材优化，适配日本市场用户习惯</p>
-            <span class="work-file mono">videos/saylo-japan.mp4</span>
+            <a class="bili-link" href="https://www.bilibili.com/video/BV1pxM86jEb3/" target="_blank" rel="noopener">↗ 在哔哩哔哩查看</a>
           </div>
         </article>
 
         <article class="work-card reveal" data-category="aigc" data-ratio="9:16">
-          <div class="work-frame" data-src="videos/saylo-taiwan.mp4">
+          <div class="work-frame" data-bvid="BV1PWM86mEG9">
             <div class="work-thumb grad-9">
               <span class="reel-label mono">AIGC 02</span>
               <button class="play-btn" aria-label="播放">▶</button>
@@ -457,13 +455,13 @@
             <span class="work-tag">AIGC 多语种 · 钛动科技</span>
             <h3>Saylo AI 应用广告 · 台湾版</h3>
             <p>针对台湾繁中市场调整内容表达与情绪切入方式，结合 AIGC 工具提升制作效率</p>
-            <span class="work-file mono">videos/saylo-taiwan.mp4</span>
+            <a class="bili-link" href="https://www.bilibili.com/video/BV1PWM86mEG9/" target="_blank" rel="noopener">↗ 在哔哩哔哩查看</a>
           </div>
         </article>
 
         <!-- ── 内容本地化 ── -->
         <article class="work-card reveal" data-category="local" data-ratio="9:16">
-          <div class="work-frame" data-src="videos/ondine-vn1.mp4">
+          <div class="work-frame" data-bvid="BV1CxM86jEFi">
             <div class="work-thumb grad-6">
               <span class="reel-label mono">LOCAL 01</span>
               <button class="play-btn" aria-label="播放">▶</button>
@@ -473,12 +471,12 @@
             <span class="work-tag">内容本地化 · 钛动科技</span>
             <h3>小奥汀水眉笔混剪 · 越南版（一）</h3>
             <p>重构视觉风格与剪辑节奏，适配越南美妆用户审美，强化妆前妆后视觉反差</p>
-            <span class="work-file mono">videos/ondine-vn1.mp4</span>
+            <a class="bili-link" href="https://www.bilibili.com/video/BV1CxM86jEFi/" target="_blank" rel="noopener">↗ 在哔哩哔哩查看</a>
           </div>
         </article>
 
         <article class="work-card reveal" data-category="local" data-ratio="9:16">
-          <div class="work-frame" data-src="videos/ondine-vn2.mp4">
+          <div class="work-frame" data-bvid="BV1pxM86jEaJ">
             <div class="work-thumb grad-8">
               <span class="reel-label mono">LOCAL 02</span>
               <button class="play-btn" aria-label="播放">▶</button>
@@ -488,13 +486,13 @@
             <span class="work-tag">内容本地化 · 钛动科技</span>
             <h3>小奥汀水眉笔混剪 · 越南版（二）</h3>
             <p>不同节奏版本，针对东南亚信息流平台调整字幕风格与产品展示顺序</p>
-            <span class="work-file mono">videos/ondine-vn2.mp4</span>
+            <a class="bili-link" href="https://www.bilibili.com/video/BV1pxM86jEaJ/" target="_blank" rel="noopener">↗ 在哔哩哔哩查看</a>
           </div>
         </article>
 
         <!-- ── 新闻专题 ── -->
         <article class="work-card reveal" data-category="news" data-ratio="16:9">
-          <div class="work-frame" data-src="videos/xiaochen.mp4">
+          <div class="work-frame" data-bvid="BV1LrM86KEn4">
             <div class="work-thumb grad-4">
               <span class="reel-label mono">NEWS 01</span>
               <button class="play-btn" aria-label="播放">▶</button>
@@ -504,12 +502,12 @@
             <span class="work-tag">新闻专题 · 湖南娄底电视台</span>
             <h3>《小晨故事》重阳节专题短视频</h3>
             <p>融媒体栏目后期制作，完成剪辑、调色与字幕包装，支持活动传播落地</p>
-            <span class="work-file mono">videos/xiaochen.mp4</span>
+            <a class="bili-link" href="https://www.bilibili.com/video/BV1LrM86KEn4/" target="_blank" rel="noopener">↗ 在哔哩哔哩查看</a>
           </div>
         </article>
 
         <article class="work-card reveal" data-category="news" data-ratio="16:9">
-          <div class="work-frame" data-src="videos/taisheng-01.mp4">
+          <div class="work-frame" data-bvid="BV1AWM86mEZn">
             <div class="work-thumb grad-10">
               <span class="reel-label mono">NEWS 02</span>
               <button class="play-btn" aria-label="播放">▶</button>
@@ -519,12 +517,12 @@
             <span class="work-tag">台生采访 · 广州小满创造</span>
             <h3>台生广州实习采访短视频（一）</h3>
             <p>参与"筑梦珠江 展翅飞翔"活动，负责台生实习者采访拍摄与后期剪辑</p>
-            <span class="work-file mono">videos/taisheng-01.mp4</span>
+            <a class="bili-link" href="https://www.bilibili.com/video/BV1AWM86mEZn/" target="_blank" rel="noopener">↗ 在哔哩哔哩查看</a>
           </div>
         </article>
 
         <article class="work-card reveal" data-category="news" data-ratio="16:9">
-          <div class="work-frame" data-src="videos/taisheng-02.mp4">
+          <div class="work-frame" data-bvid="BV1WWM86mE33">
             <div class="work-thumb grad-12">
               <span class="reel-label mono">NEWS 03</span>
               <button class="play-btn" aria-label="播放">▶</button>
@@ -534,13 +532,13 @@
             <span class="work-tag">台生采访 · 广州小满创造</span>
             <h3>台生广州实习采访短视频（二）</h3>
             <p>不同受访者的故事剪辑版本，通过个体叙事呈现台生在大陆实习的真实体验</p>
-            <span class="work-file mono">videos/taisheng-02.mp4</span>
+            <a class="bili-link" href="https://www.bilibili.com/video/BV1WWM86mE33/" target="_blank" rel="noopener">↗ 在哔哩哔哩查看</a>
           </div>
         </article>
 
         <!-- ── 获奖作品 ── -->
         <article class="work-card reveal" data-category="award" data-ratio="9:16">
-          <div class="work-frame" data-src="videos/award-guangzhou.mp4">
+          <div class="work-frame" data-bvid="BV1c8M86CEJE">
             <div class="work-thumb grad-5">
               <span class="reel-label mono">AWARD 01</span>
               <button class="play-btn" aria-label="播放">▶</button>
@@ -550,12 +548,12 @@
             <span class="work-tag">获奖作品 · 三等奖</span>
             <h3>"印象广州"短视频大赛获奖作品</h3>
             <p>"筑梦珠江 展翅飞翔"台湾大学生广州实习活动之"印象广州"短视频大赛三等奖</p>
-            <span class="work-file mono">videos/award-guangzhou.mp4</span>
+            <a class="bili-link" href="https://www.bilibili.com/video/BV1c8M86CEJE/" target="_blank" rel="noopener">↗ 在哔哩哔哩查看</a>
           </div>
         </article>
 
         <article class="work-card reveal" data-category="award" data-ratio="16:9">
-          <div class="work-frame" data-src="videos/award-ads.mp4">
+          <div class="work-frame" data-bvid="BV1FaM86GEzW">
             <div class="work-thumb grad-2">
               <span class="reel-label mono">AWARD 02</span>
               <button class="play-btn" aria-label="播放">▶</button>
@@ -565,13 +563,13 @@
             <span class="work-tag">获奖作品 · 二等奖</span>
             <h3>大学生广告艺术大赛微电影广告</h3>
             <p>第十四届全国大学生广告艺术大赛微电影广告湖南赛区二等奖</p>
-            <span class="work-file mono">videos/award-ads.mp4</span>
+            <a class="bili-link" href="https://www.bilibili.com/video/BV1FaM86GEzW/" target="_blank" rel="noopener">↗ 在哔哩哔哩查看</a>
           </div>
         </article>
 
         <!-- ── 个人创作 ── -->
-        <article class="work-card reveal" data-category="personal" data-ratio="9:16">
-          <div class="work-frame" data-src="videos/nantou.mp4">
+        <article class="work-card reveal" data-category="personal" data-ratio="16:9">
+          <div class="work-frame" data-bvid="BV1NnM86SEg3">
             <div class="work-thumb grad-11">
               <span class="reel-label mono">PERSONAL 01</span>
               <button class="play-btn" aria-label="播放">▶</button>
@@ -581,12 +579,12 @@
             <span class="work-tag">个人创作 · 宣传短片</span>
             <h3>南头古镇宣传视频</h3>
             <p>自主策划拍摄，以古镇历史与现代文化交融为主题，独立完成脚本、拍摄与后期</p>
-            <span class="work-file mono">videos/nantou.mp4</span>
+            <a class="bili-link" href="https://www.bilibili.com/video/BV1NnM86SEg3/" target="_blank" rel="noopener">↗ 在哔哩哔哩查看</a>
           </div>
         </article>
 
         <article class="work-card reveal" data-category="personal" data-ratio="16:9">
-          <div class="work-frame" data-src="videos/lotr.mp4">
+          <div class="work-frame" data-bvid="BV1NpM86EET6">
             <div class="work-thumb grad-4">
               <span class="reel-label mono">PERSONAL 02</span>
               <button class="play-btn" aria-label="播放">▶</button>
@@ -594,14 +592,14 @@
           </div>
           <div class="work-meta">
             <span class="work-tag">个人创作 · 混剪</span>
-            <h3>指环王混剪</h3>
+            <h3>指环王混剪 · lonely</h3>
             <p>以情绪驱动为核心的混剪作品，探索节奏、音乐与画面叙事之间的配合关系</p>
-            <span class="work-file mono">videos/lotr.mp4</span>
+            <a class="bili-link" href="https://www.bilibili.com/video/BV1NpM86EET6/" target="_blank" rel="noopener">↗ 在哔哩哔哩查看</a>
           </div>
         </article>
 
         <article class="work-card reveal" data-category="personal" data-ratio="16:9">
-          <div class="work-frame" data-src="videos/biye-vlog.mp4">
+          <div class="work-frame" data-bvid="BV1F8M86CEQL">
             <div class="work-thumb grad-8">
               <span class="reel-label mono">PERSONAL 03</span>
               <button class="play-btn" aria-label="播放">▶</button>
@@ -609,24 +607,24 @@
           </div>
           <div class="work-meta">
             <span class="work-tag">个人创作 · Vlog</span>
-            <h3>毕业 Vlog</h3>
-            <p>记录研究生毕业前后的生活片段，通过叙事性剪辑呈现个人视角与情感表达</p>
-            <span class="work-file mono">videos/biye-vlog.mp4</span>
+            <h3>毕业 Vlog · 如果我们不曾相遇</h3>
+            <p>记录本科毕业前后的生活片段，通过叙事性剪辑呈现个人视角与情感表达</p>
+            <a class="bili-link" href="https://www.bilibili.com/video/BV1F8M86CEQL/" target="_blank" rel="noopener">↗ 在哔哩哔哩查看</a>
           </div>
         </article>
 
-        <article class="work-card reveal" data-category="personal" data-ratio="16:9">
-          <div class="work-frame" data-src="videos/meme-hip.mp4">
+        <article class="work-card reveal" data-category="personal" data-ratio="9:16">
+          <div class="work-frame" data-bvid="BV1NnM86SEB3">
             <div class="work-thumb grad-3">
               <span class="reel-label mono">PERSONAL 04</span>
               <button class="play-btn" aria-label="播放">▶</button>
             </div>
           </div>
           <div class="work-meta">
-            <span class="work-tag">个人创作 · 创意混剪</span>
-            <h3>meme-hip 创意短片</h3>
+            <span class="work-tag">个人创作 · Meme 混剪</span>
+            <h3>HIP，但是舍友</h3>
             <p>融合 meme 文化与 hip-hop 节奏的实验性混剪，探索娱乐性与视觉节奏感的边界</p>
-            <span class="work-file mono">videos/meme-hip.mp4</span>
+            <a class="bili-link" href="https://www.bilibili.com/video/BV1NnM86SEB3/" target="_blank" rel="noopener">↗ 在哔哩哔哩查看</a>
           </div>
         </article>
 
@@ -661,6 +659,7 @@
     <div class="container contact-inner">
       <span class="eyebrow">THE END — 联系我</span>
       <h2>一起合作吧</h2>
+      <p style="color:#bdb6a8;margin-bottom:44px;font-size:1.05rem;">已于今年六月毕业。</p>
       <div class="contact-grid">
         <a href="mailto:xia51111115@163.com" class="contact-item">✉ xia51111115@163.com</a>
         <a href="tel:17773862279" class="contact-item">☎ 177 7386 2279</a>
@@ -717,17 +716,25 @@
     });
   });
 
-  document.querySelectorAll('.play-btn').forEach(btn=>{
+  // 点击播放按钮 → 嵌入 B 站播放器
+ document.querySelectorAll('.play-btn').forEach(btn=>{
     btn.addEventListener('click',()=>{
-      const frame=btn.closest('.work-frame');
-      const src=frame.dataset.src;
-      const video=document.createElement('video');
-      video.controls=true;video.autoplay=true;video.playsInline=true;video.src=src;
-      video.addEventListener('error',()=>{
-        frame.innerHTML=`<div class="work-missing"><p>视频文件未找到</p><p class="mono">请将文件命名为 ${src.split('/').pop()}<br>放入 videos 文件夹</p></div>`;
-      });
+      const frame = btn.closest('.work-frame');
+      const bvid = frame.dataset.bvid;
+
+      const iframe = document.createElement('iframe');
+
+      iframe.src = `https://player.bilibili.com/player.html?bvid=${bvid}&page=1&high_quality=1&danmaku=0`;
+
+      iframe.style.cssText =
+      'width:100%;height:100%;border:none;display:block;';
+
+      iframe.setAttribute('allowfullscreen','true');
+      iframe.setAttribute('scrolling','no');
+      iframe.setAttribute('frameborder','0');
+
       frame.innerHTML='';
-      frame.appendChild(video);
+      frame.appendChild(iframe);
     });
   });
 </script>
